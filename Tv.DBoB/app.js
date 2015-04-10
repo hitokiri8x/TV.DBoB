@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var dbmodel = require('./models/*')
+
 
 var app = express();
 
@@ -27,10 +27,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-
+/*
 
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('tvdbob', 'username', 'password');
+var sequelize = new Sequelize('tvdb', 'root', 'root');
+var models = require('sequelize-import')('models', sequelize, {   
+});*/
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
