@@ -1,9 +1,8 @@
 ﻿var express = require('express');
 var router = express.Router();
-
+function error(){ console.log('AAAAZZZZ');};
 /* GET home page. */
 router.get('/', function (req, res) {
-    console.log('risultato');
     var Sequelize = require('sequelize');
     var sequelize = new Sequelize('tvdb', 'root', 'root', {
         host: "127.0.0.1",
@@ -14,15 +13,27 @@ router.get('/', function (req, res) {
     });
     var models = require('sequelize-import')('models', sequelize, {
     });
-    var aaa;
-    models.languages.find(15).then(function (result) {
-        console.log(result.englishname);
-        aaa = result.englishname;
-        console.log(aaa);
+    var async = require("async");
+    async.parallel( {
+            lingua: function (callback) {
+    setTimeout(function () {
+                models.languages.find(150).then(function (result) {
+                    var aa = result.englishname;                    
+                    callback(null, aa);
+                    });
+                }, 2000);
+    },
+    test: function (callback) {
+        setTimeout(function () {
+            callback(null, 'two');
+        }, 1000);
+    }
+},
+function (err, results) {
+       console.log(err);
+       console.log(results);
+       res.render('index', { title: results.lingua });
     });
-   
-    //console.log(models.languages.find(15));
-    res.render('index', { title: aaa });
 });
 
 module.exports = router;
