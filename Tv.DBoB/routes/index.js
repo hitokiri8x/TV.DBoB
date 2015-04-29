@@ -1,5 +1,7 @@
 ﻿var express = require('express');
 var router = express.Router();
+var config = require('../config');
+
 function error(){ console.log('AAAAZZZZ');};
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -18,7 +20,7 @@ router.get('/', function (req, res) {
             test: function (callback) {
             setTimeout(function () {
                 var TVDBClient = require("node-tvdb");
-                var tvdb = new TVDBClient("");                
+                var tvdb = new TVDBClient(config.tvdbapi);                
                 tvdb.getSeries("The Simpsons", function (err, response) {
                     console.log(response)
                     callback(null, response);
