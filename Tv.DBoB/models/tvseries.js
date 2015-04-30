@@ -3,8 +3,9 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('tvseries', { 
     id: {
-      type: DataTypes.INTEGER(10),
-      allowNull: false,
+      type: DataTypes.INTEGER(10),      
+	  primaryKey: true,
+	  autoIncrement: true,	 
     },
     SeriesName: {
       type: DataTypes.STRING,
